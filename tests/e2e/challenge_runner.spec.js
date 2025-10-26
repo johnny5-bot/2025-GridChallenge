@@ -1,15 +1,15 @@
 // File: 2025-GridChallenge/tests/e2e/challenge_runner.spec.js
 const { test, expect } = require('@playwright/test');
-const path = require('path'); // Needed to construct file paths
+const path = require('path');
+const fs = require('fs');
 
-// --- List of Implementations to Test ---
-// Add all your implementation files to this array.
-const implementations = [
-  'implementation_A.js',
-  'implementation_B.js',
-  // 'implementation_C_new_pan_logic.js',
-  // 'implementation_D_different_grid.js',
-];
+// --- Automatically Discover All Implementations in src/ ---
+const srcPath = path.join(__dirname, '../../src');
+const implementations = fs.readdirSync(srcPath)
+  .filter(file => file.startsWith('implementation_') && file.endsWith('.js'))
+  .sort(); // Sort to ensure consistent test order
+
+console.log(`Discovered implementations: ${implementations.join(', ')}`);
 
 // Helper function to get computed transform values
 async function getTransform(page, selector) {
