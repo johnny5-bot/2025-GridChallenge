@@ -10,95 +10,8 @@
     <!-- The title will be set by the script below -->
     <title>MANUAL TEST</title>
     
-    <!-- This is the complete, shared CSS for all implementations -->
-    <style>
-        body, html {
-            margin: 0;
-            height: 100vh;
-            overflow: hidden;
-            font-family: sans-serif;
-            background-color: #f0f0f0;
-        }
-        .app-container {
-            display: grid;
-            height: 100vh;
-            width: 100vw;
-            grid-template-rows: 60px 1fr;
-            grid-template-columns: 60px 1fr 60px;
-            background-color: #ccc;
-            gap: 1px;
-        }
-        .grid-cell {
-            background-color: #fff;
-            overflow: hidden;
-            position: relative;
-        }
-        #top-center, #left-center {
-            position: relative;
-            background-color: #e0e0e0;
-        }
-        #top-center svg, #left-center svg {
-            position: absolute;
-            top: 0;
-            left: 0;
-        }
-        #top-right { grid-area: 1 / 3 / 2 / 4; background-color: #e0e0e0; }
-        #center-center {
-            grid-area: 2 / 2 / 3 / 3;
-            cursor: grab;
-            overflow: hidden;
-            border: 1px solid #aaa;
-        }
-        #right-center { grid-area: 2 / 3 / 3 / 4; background-color: #e0e0e0; }
-        #image-container {
-            position: relative;
-            width: fit-content;
-            height: fit-content;
-            transform-origin: 0 0;
-            will-change: transform;
-            background-color: #eee;
-        }
-        #image-element {
-            display: block;
-            max-width: none;
-            user-select: none;
-            -webkit-user-drag: none;
-        }
-        .svg-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-        }
-        #grid-overlay line {
-            stroke: rgba(255, 0, 0, 0.5);
-            stroke-width: 1;
-        }
-        #top-lines, #left-lines {
-            display: block;
-            min-width: 100%;
-            min-height: 100%;
-        }
-         #top-lines line, #left-lines line {
-            stroke: #333;
-            stroke-width: 1;
-         }
-        .zoom-controls {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: rgba(0,0,0,0.5);
-            padding: 5px;
-            border-radius: 3px;
-            z-index: 10;
-        }
-        .zoom-controls button {
-            margin: 0 2px;
-            min-width: 25px;
-        }
-    </style>
+    <!-- Shared CSS is part of the spec -->
+    <link rel="stylesheet" href="./challenge.css">
 </head>
 <body>
     <!-- This is the complete, shared HTML (DOM) for all implementations -->
@@ -111,6 +24,13 @@
 
         <div id="left-center" class="grid-cell">
             <svg id="left-lines"></svg>
+            <!-- Implementation selector UI (keeps shared CSS unchanged) -->
+            <div id="impl-selector" style="position: relative; margin: 6px; font-family: sans-serif; font-size: 12px;">
+                <label for="implSelect">Implementation: </label>
+                <select id="implSelect">
+                    <!-- options populated by script -->
+                </select>
+            </div>
         </div>
 
         <div id="center-center" class="grid-cell">
@@ -143,30 +63,49 @@
         const zoomOutButton = document.getElementById('zoom-out');
     </script>
 
-    <!-- 2. Dynamically load the implementation from the URL -->
+    <!-- 2. Selector in left pane + dynamic script loader (CSS unchanged) -->
     <script>
-        // Get the URL search parameters
-        const params = new URLSearchParams(window.location.search);
-        
-        // Get the 'impl' parameter, or default to implementation_A.js
-        // The path must be relative to this HTML file in the root
-        const implFile = params.get('impl') || './src/implementation_B.js';
+        // Available implementations (paths relative to this file)
+        const implementations = [
+            { label: 'Implementation A', value: './src/implementation_A.js' },
+            { label: 'Implementation B', value: './src/implementation_B.js' },
+            { label: 'Implementation C', value: './src/implementation_C.js' },
+        ];
 
-        // Set the page title to show which implementation is loaded
+        // Read ?impl=... from URL and default to B
+        const params = new URLSearchParams(window.location.search);
+        const implFromUrl = params.get('impl');
+        const implFile = implFromUrl ? implFromUrl : implementations[1].value;
+
+        // Populate the selector in the left pane
+        const implSelect = document.getElementById('implSelect');
+        if (implSelect) {
+            implementations.forEach(opt => {
+                const o = document.createElement('option');
+                o.value = opt.value;
+                o.textContent = opt.label;
+                if (opt.value === implFile) o.selected = true;
+                implSelect.appendChild(o);
+            });
+            implSelect.addEventListener('change', () => {
+                const newImpl = implSelect.value;
+                const newParams = new URLSearchParams(window.location.search);
+                newParams.set('impl', newImpl);
+                window.location.search = newParams.toString();
+            });
+        }
+
+        // Update title to show active implementation
         document.title = `MANUAL TEST - ${implFile}`;
 
-        // Create a new script tag and add it to the page
+        // Dynamically load the chosen implementation
         const scriptTag = document.createElement('script');
-        
-        // Add error handling in case the file doesn't exist
         scriptTag.onerror = () => {
             document.body.innerHTML = `<h1 style="color: red; font-family: sans-serif; padding: 20px;">Error: Could not load script: ${implFile}</h1><p style="font-family: sans-serif; padding: 20px;">Make sure the file exists and the path is correct in the URL (e.g., ?impl=src/implementation_A.js)</p>`;
-        }
-        
+        };
         scriptTag.src = implFile;
         document.body.appendChild(scriptTag);
     </script>
 
 </body>
 </html>
-

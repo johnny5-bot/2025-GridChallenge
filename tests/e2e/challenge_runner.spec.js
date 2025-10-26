@@ -43,6 +43,11 @@ for (const implFile of implementations) {
       // Path is relative to this test file
       const implPath = path.join(__dirname, '../../src/', implFile);
       await page.addScriptTag({ path: implPath });
+		await page.evaluate((src) => {
+		  const im = document.getElementById('image-element');
+		  im.src = src;
+		}, 'data:image/svg+xml;utf8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="800" height="800"></svg>'));
+
       
       // 3. Wait for the injected script's img.onload to fire
       // We check the global variable set by the implementation scripts
