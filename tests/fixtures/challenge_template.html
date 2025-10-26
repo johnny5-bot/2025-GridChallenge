@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2025 Grid Challenge</title>
+    <style>
+        body, html {
+            margin: 0;
+            height: 100vh;
+            overflow: hidden;
+            font-family: sans-serif;
+            background-color: #f0f0f0;
+        }
+        .app-container {
+            display: grid;
+            height: 100vh;
+            width: 100vw;
+            grid-template-rows: 60px 1fr;
+            grid-template-columns: 60px 1fr 60px;
+            background-color: #ccc;
+            gap: 1px;
+        }
+        .grid-cell {
+            background-color: #fff;
+            overflow: hidden;
+            position: relative;
+        }
+        #top-center, #left-center {
+            position: relative;
+            background-color: #e0e0e0;
+        }
+        #top-center svg, #left-center svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        #top-right { grid-area: 1 / 3 / 2 / 4; background-color: #e0e0e0; }
+        #center-center {
+            grid-area: 2 / 2 / 3 / 3;
+            cursor: grab;
+            overflow: hidden;
+            border: 1px solid #aaa;
+        }
+        #right-center { grid-area: 2 / 3 / 3 / 4; background-color: #e0e0e0; }
+        #image-container {
+            position: relative;
+            width: fit-content;
+            height: fit-content;
+            transform-origin: 0 0;
+            will-change: transform;
+            background-color: #eee;
+        }
+        #image-element {
+            display: block;
+            max-width: none;
+            user-select: none;
+            -webkit-user-drag: none;
+        }
+        .svg-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        #grid-overlay line {
+            stroke: rgba(255, 0, 0, 0.5);
+            stroke-width: 1;
+        }
+        #top-lines, #left-lines {
+            display: block;
+            min-width: 100%;
+            min-height: 100%;
+        }
+         #top-lines line, #left-lines line {
+            stroke: #333;
+            stroke-width: 1;
+         }
+        .zoom-controls {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.5);
+            padding: 5px;
+            border-radius: 3px;
+            z-index: 10;
+        }
+        .zoom-controls button {
+            margin: 0 2px;
+            min-width: 25px;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <div id="top-left" class="grid-cell"></div>
+        <div id="top-center" class="grid-cell">
+            <svg id="top-lines"></svg>
+        </div>
+        <div id="top-right" class="grid-cell"></div>
+
+        <div id="left-center" class="grid-cell">
+            <svg id="left-lines"></svg>
+        </div>
+
+        <div id="center-center" class="grid-cell">
+            <div id="image-container">
+                <img id="image-element" alt="Load image...">
+                <svg id="grid-overlay" class="svg-overlay"></svg>
+            </div>
+            <div class="zoom-controls">
+                <button id="zoom-out">-</button>
+                <span id="zoom-level" style="color: white; margin: 0 5px;">100%</span>
+                <button id="zoom-in">+</button>
+            </div>
+        </div>
+
+        <div id="right-center" class="grid-cell"></div>
+    </div>
+
+    <script>
+        // These are now global consts for the implementations
+        const imageViewer = document.getElementById('center-center');
+        const imageContainer = document.getElementById('image-container');
+        const img = document.getElementById('image-element');
+        const gridOverlay = document.getElementById('grid-overlay');
+        const topBar = document.getElementById('top-center');
+        const leftBar = document.getElementById('left-center');
+        const topLinesSvg = document.getElementById('top-lines');
+        const leftLinesSvg = document.getElementById('left-lines');
+        const zoomLevelSpan = document.getElementById('zoom-level');
+        const zoomInButton = document.getElementById('zoom-in');
+        const zoomOutButton = document.getElementById('zoom-out');
+
+        // The implementation scripts will set window.imgWidth and window.imgHeight
+    </script>
+</body>
+</html>
+
