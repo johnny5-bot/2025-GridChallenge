@@ -5,7 +5,6 @@ const fs = require('fs');
 const srcPath = path.join(__dirname, '../../src');
 const implementations = fs.readdirSync(srcPath)
   .filter(f => f.startsWith('implementation_') && f.endsWith('.js'))
-  .filter(f => !f.includes('reference')) // Exclude reference implementations from tests
   .sort();
 
 const DATA_URL_800 =
