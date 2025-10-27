@@ -71,6 +71,25 @@ Create an implementation file `src/implementation_NAME.js` that implements an in
 
 This challenge is designed to test whether AI systems can solve complex technical problems from specifications alone.
 
+## 🔄 Iterating on Tests
+
+When working on the tests themselves (not implementations), you can generate a complete context dump for AI assistance:
+
+```bash
+npm run repomix
+```
+
+This will:
+1. Generate `SPEC.md` with the current specification
+2. Run all tests to generate `test-results.json`
+3. Scan the entire codebase with repomix
+
+Then upload `repomix-output.xml` to your AI assistant for context-aware help with:
+- Understanding test failures
+- Improving test coverage
+- Debugging test issues
+- Understanding the codebase structure
+
 ### Generate the Specification
 
 The specification is generated on-the-fly from the current project state:
