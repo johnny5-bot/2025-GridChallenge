@@ -7,9 +7,10 @@
     "test:ui": "playwright test --ui",
     "test:headed": "playwright test --headed",
     "test:debug": "playwright test --debug",
+    "test:json": "playwright test --reporter=json",
     "spec": "node gen_spec.js > SPEC.md",
     "manual": "node generate_manual_test.js > manual_test.html",
-      "repomix": "npm run spec && npm test -- --reporter=json || true && repomix"
+    "repomix": "npm run spec && npm run test:json || true && repomix"
   },
   "keywords": [
     "grid",
