@@ -5,6 +5,7 @@ module.exports = defineConfig({
   // Tell Playwright where to look for test files
   testDir: './tests/e2e',
   fullyParallel: true,
+  timeout: 10000, // 10 second timeout (tests should be fast but allow for network delays)
   
   // --- UPDATED REPORTER SECTION ---
   // We've changed 'reporter' from a simple string to an array of arrays.
