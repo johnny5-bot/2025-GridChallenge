@@ -10,7 +10,7 @@
     "test:json": "playwright test --reporter=json > test-results.json",
     "spec": "node gen_spec.js > SPEC.md",
     "manual": "node generate_manual_test.js > manual_test.html",
-    "repomix": "npm run spec && npm run test:json || true && repomix"
+    "repomix": "npm run spec && npm run test:json || true && repomix --include-gitignore"
   },
   "keywords": [
     "grid",
