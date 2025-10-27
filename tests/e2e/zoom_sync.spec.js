@@ -71,9 +71,9 @@ for (const implFile of implementations) {
     });
 
     test('should maintain grid-to-ruler alignment after zoom', async ({ page }) => {
-      // Get initial line positions
-      const gridLine = await page.locator('#grid-overlay line:nth-child(5)').getAttribute('x1');
-      const rulerLine = await page.locator('#top-lines line:nth-child(6)').getAttribute('x1');
+      // Get initial line positions - use .nth() instead of :nth-child() to count only <line> elements
+      const gridLine = await page.locator('#grid-overlay line').nth(4).getAttribute('x1');
+      const rulerLine = await page.locator('#top-lines line').nth(5).getAttribute('x1');
       
       // At scale=1, they should match
       const rulerLineValue = parseFloat(rulerLine);
@@ -84,8 +84,8 @@ for (const implFile of implementations) {
       await page.locator('#zoom-in').click();
       
       // Get new positions
-      const newGridLine = await page.locator('#grid-overlay line:nth-child(5)').getAttribute('x1');
-      const newRulerLine = await page.locator('#top-lines line:nth-child(6)').getAttribute('x1');
+      const newGridLine = await page.locator('#grid-overlay line').nth(4).getAttribute('x1');
+      const newRulerLine = await page.locator('#top-lines line').nth(5).getAttribute('x1');
       
       // Grid line position (on the image) should not change
       expect(newGridLine).toBe(gridLine);
