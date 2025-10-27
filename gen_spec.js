@@ -21,10 +21,6 @@ function codeBlock(lang, content) {
 function main() {
   const css = read('challenge.css');
   const html = read('tests/fixtures/challenge_template.html');
-  const translationSync = read('tests/e2e/translation_sync.spec.js');
-  const zoomSync = read('tests/e2e/zoom_sync.spec.js');
-  const gridAlign = read('tests/e2e/grid_alignment.spec.js');
-  const config = read('playwright.config.js');
 
   const brief = `Goal
 - Implement \`src/implementation_*.js\` files that power an image viewer with pan+zoom, a grid overlay on the image, and synchronized rulers (top and left).
@@ -57,14 +53,10 @@ Divisions
 - Grid overlay excludes edges (1..N-1). Rulers include edges (0..N).
 `;
 
-  let out = `# Grid Challenge Implementation Spec\n\nThis document is generated from repo sources to serve as a complete, self-contained prompt for implementing \`src/implementation_*.js\`.\n`;
+  let out = `# Grid Challenge Implementation Spec\n\nThis document is generated from repo sources to serve as a complete, self-contained prompt for implementing \`src/implementation_*.js\`.\n\n**Note**: This spec is independent of test requirements. Tests are separate and used to verify implementations.\n`;
   out += section('High-Level Brief', brief);
   out += section('CSS (challenge.css)', codeBlock('css', css));
   out += section('HTML Template (challenge_template.html)', codeBlock('html', html));
-  out += section('Test: Translation Sync', codeBlock('javascript', translationSync));
-  out += section('Test: Zoom Sync', codeBlock('javascript', zoomSync));
-  out += section('Test: Grid Alignment', codeBlock('javascript', gridAlign));
-  out += section('Playwright Config', codeBlock('javascript', config));
 
   process.stdout.write(out);
 }
