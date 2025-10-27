@@ -28,20 +28,18 @@ Create an implementation file `src/implementation_NAME.js` that implements an in
 
 ```
 2025-GridChallenge/
-├── README.md              → This file - complete documentation
-├── gen_spec.js            → Generates SPEC.md for AI agents
-├── generate_manual_test.js → Generates manual_test.html
-├── playwright.config.js  → Playwright configuration
-├── package.json           → Dependencies and scripts
-├── challenge.css          → Styles for the UI
+├── README.md                    → This file - complete documentation
+├── gen_spec.js                  → Generates SPEC.md for AI agents
+├── generate_manual_test.js      → Generates manual_test.html
+├── playwright.config.js         → Playwright configuration
+├── package.json                 → Dependencies and scripts
+├── challenge.css                → Styles for the UI
 │
-├── src/                   → Your implementations (auto-discovered)
-│   ├── implementation_A.js
-│   ├── implementation_B.js
-│   └── implementation_C.js
+├── src/                         → Your implementations (auto-discovered)
+│   └── implementation_reference.js (example only - not used in tests)
 │
 └── tests/
-    ├── e2e/               → Test suites (auto-discovers all specs)
+    ├── e2e/                     → Test suites (auto-discovers all specs)
     │   ├── translation_sync.spec.js
     │   ├── zoom_sync.spec.js
     │   └── grid_alignment.spec.js
@@ -211,13 +209,15 @@ After clicking zoom-in:
 - Line width scales with zoom level
 - Labels every 5 divisions on rulers
 
-## 🎓 Current Implementations
+## 🎓 Test Suites
 
-- `implementation_A.js` - Standard (ZOOM_FACTOR = 1.2)
-- `implementation_B.js` - Fast zoom (ZOOM_FACTOR = 1.8)
-- `implementation_C.js` - Slow zoom (ZOOM_FACTOR = 1.05)
+The challenge includes three test suites that automatically discover all implementations in `src/`:
 
-All are automatically discovered and tested!
+- **translation_sync.spec.js** - Tests pan/drag synchronization between image, grid, and rulers
+- **zoom_sync.spec.js** - Tests zoom behavior and synchronization after zoom
+- **grid_alignment.spec.js** - Tests pixel-perfect grid-to-ruler alignment
+
+**Your implementation will be automatically tested** by all three suites - just create a file named `implementation_*.js` in the `src/` directory.
 
 ## License
 
