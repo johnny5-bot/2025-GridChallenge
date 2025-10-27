@@ -1,4 +1,4 @@
-{
+	{
   "includeGlobs": [
     "test-results.json",
     "SPEC.md"
@@ -11,5 +11,6 @@
     "playwright/.cache/**"
   ],
   "ignoreContentPatterns": [],
+  "useIgnoreFiles": false,
   "obfuscate": false
 }
