@@ -91,7 +91,7 @@ for (const implFile of implementations) {
       expect(newGridLine).toBe(gridLine);
       
       // Ruler line should now be scaled
-      imgTransform = await getTransform(page, '#image-container');
+      const imgTransform = await getTransform(page, '#image-container');
       const newScale = imgTransform.scale;
       expect(parseFloat(newRulerLine)).toBeCloseTo(parseFloat(newGridLine) * newScale, 0);
     });
