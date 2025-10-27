@@ -1,6 +1,7 @@
 {
   "includeGlobs": [
-    "test-results.json"
+    "test-results.json",
+    "SPEC.md"
   ],
   "ignoreGlobs": [
     "node_modules/**",

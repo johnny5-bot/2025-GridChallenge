@@ -37,7 +37,7 @@ Zoom Sync - Discovered implementations:
         "testMatch": [
           "**/*.@(spec|test).?(c|m)[jt]s?(x)"
         ],
-        "timeout": 30000
+        "timeout": 10000
       }
     ],
     "shard": null,
@@ -55,8 +55,8 @@ Zoom Sync - Discovered implementations:
     }
   ],
   "stats": {
-    "startTime": "2025-10-27T00:59:50.626Z",
-    "duration": 7.588000000000022,
+    "startTime": "2025-10-27T01:02:09.355Z",
+    "duration": 8.697999999999979,
     "expected": 0,
     "skipped": 0,
     "unexpected": 0,
