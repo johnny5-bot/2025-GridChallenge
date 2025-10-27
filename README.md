@@ -27,16 +27,27 @@ Create an implementation file `src/implementation_NAME.js` that implements an in
 ## 📁 Project Structure
 
 ```
-src/                          → Your implementations go here
-  ├── implementation_A.js     → Working example (1.2x zoom)
-  ├── implementation_B.js     → Fast zoom (1.8x)
-  └── implementation_C.js     → Slow zoom (1.05x)
-
-tests/
-  ├── e2e/
-  │   └── challenge_runner.spec.js  → Test suite (auto-discovers all implementations)
-  └── fixtures/
-      └── challenge_template.html    → HTML template with grid/rulers
+2025-GridChallenge/
+├── README.md              → This file - complete documentation
+├── gen_spec.js            → Generates SPEC.md for AI agents
+├── generate_manual_test.js → Generates manual_test.html
+├── playwright.config.js  → Playwright configuration
+├── package.json           → Dependencies and scripts
+├── challenge.css          → Styles for the UI
+│
+├── src/                   → Your implementations (auto-discovered)
+│   ├── implementation_A.js
+│   ├── implementation_B.js
+│   └── implementation_C.js
+│
+└── tests/
+    ├── e2e/               → Test suites (auto-discovers all specs)
+    │   ├── translation_sync.spec.js
+    │   ├── zoom_sync.spec.js
+    │   └── grid_alignment.spec.js
+    │
+    └── fixtures/
+        └── challenge_template.html
 ```
 
 ## 📝 Add Your Implementation
