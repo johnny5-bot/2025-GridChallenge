@@ -1,71 +1,200 @@
-# Grid Challenge 2025
+# 2025 Grid Challenge
 
-A testing project for multiple grid implementation approaches using Playwright.
+A Playwright-based challenge for implementing synchronized pan/zoom with grid and ruler overlays.
 
-## Project Structure
+## 🚀 Quick Start
 
-```
-my-grid-project/
-├── node_modules/           # Installed by 'npm install'
-├── package.json            # Project manifest
-├── playwright.config.js    # Playwright configuration
-│
-├── src/                    # All different implementations
-│   ├── implementation_A.js
-│   ├── implementation_B.js
-│   └── ... (etc)
-│
-└── tests/                  # All test-related files
-    ├── e2e/                # End-to-end test specs
-    │   └── grid_runner.spec.js
-    │
-    └── fixtures/           # Test assets (like HTML templates)
-        └── grid_template.html
-```
-
-## Setup
-
-1. Install dependencies:
 ```bash
+# Install dependencies
 npm install
+
+# Install Playwright browser
+npx playwright install chromium
+
+# Run tests (interactive UI mode - recommended)
+npm run test:ui
 ```
 
-2. Install Playwright browsers:
+## 🎯 The Challenge
+
+Create an implementation file `src/implementation_NAME.js` that implements an interactive image viewer with:
+
+- ✅ **Pan/Drag** - Drag the image to pan it around
+- ✅ **Zoom** - Zoom in/out using buttons or mouse wheel  
+- ✅ **Grid Synchronization** - Grid overlay stays aligned with the image
+- ✅ **Ruler Synchronization** - Top and left rulers sync with image position and scale
+
+## 📁 Project Structure
+
+```
+src/                          → Your implementations go here
+  ├── implementation_A.js     → Working example (1.2x zoom)
+  ├── implementation_B.js     → Fast zoom (1.8x)
+  └── implementation_C.js     → Slow zoom (1.05x)
+
+tests/
+  ├── e2e/
+  │   └── challenge_runner.spec.js  → Test suite (auto-discovers all implementations)
+  └── fixtures/
+      └── challenge_template.html    → HTML template with grid/rulers
+```
+
+## 📝 Add Your Implementation
+
+1. Create `src/implementation_YOURNAME.js`
+2. The test runner **automatically discovers** all files matching `implementation_*.js`
+3. No manual configuration needed!
+
+**Note**: The point of this challenge is to write the implementation from scratch using only the specification. Looking at existing implementations defeats the purpose!
+
+## 🧪 Running Tests
+
+| Command | Description |
+|---------|-------------|
+| `npm run test:ui` | Interactive UI mode (recommended) - opens browser |
+| `npm test` | Run all tests - terminal output |
+| `npm run test:headed` | Watch tests in browser |
+| `npm run test:debug` | Debug mode |
+| `npm run spec` | Generate complete specification |
+
+## 🤖 Testing AI Systems
+
+This challenge is designed to test whether AI systems can solve complex technical problems from specifications alone.
+
+### Generate the Specification
+
+The specification is generated on-the-fly from the current project state:
+
 ```bash
-npx playwright install
+npm run spec > SPEC.md
 ```
 
-## Running Tests
+This generates `SPEC.md` containing:
+- ✅ Complete HTML template
+- ✅ All CSS styles
+- ✅ JavaScript code examples
+- ✅ Test requirements
+- ✅ Configuration constants
+- ✅ Helper function patterns
 
-- Run all tests: `npm test`
-- Run with UI: `npm run test:ui`
-- Run in headed mode: `npm run test:headed`
-- Debug tests: `npm run test:debug`
+**The spec is intentionally complete** - it contains everything needed to write a working implementation without looking at existing code.
 
-### Dump to JSON
+### Challenge an AI System (Step by Step)
 
+**Step 1: Generate the specification**
+```bash
+npm run spec > SPEC.md
 ```
-npx playwright test --reporter=json >test-results.json
+This creates `SPEC.md` in the project root containing the complete challenge specification.
+
+**Step 2: Send SPEC.md to AI**
+Give the AI **ONLY** the `SPEC.md` file (no access to `src/implementation_*.js` files). Ask them to:
+> "Read SPEC.md and create a file `src/implementation_AI.js` that implements the required functionality and passes all tests."
+
+**Step 3: Save the AI's implementation**
+Put the AI-generated file in the `src/` directory:
+```bash
+# AI generates: src/implementation_AI.js
+# Just save it to src/
 ```
 
-### Bundle repo including test-results.json to send AI
+**Step 4: Test the implementation**
+```bash
+# Run all tests (tests all implementations)
+npm run test:ui
 
+# Or test just one implementation in terminal:
+npx playwright test --grep "implementation_AI"
 ```
-repomix # writes repomix-output.xml
-```
 
-## Adding New Implementations
+The goal is to see if an AI can **one-shot** solve this challenge using only the specification. No hints, no examples, no templates - just the spec.
 
-1. Create a new implementation file in `src/` (e.g., `implementation_C.js`)
-2. Export a `createGrid` function with the signature:
+## 📚 Implementation Requirements
+
+Your implementation must:
+
+1. **Set global variables** when image loads:
    ```javascript
-   export function createGrid(container, items, config = {}) {
-       // Your implementation here
-   }
+   window.imgWidth = img.naturalWidth;
+   window.imgHeight = img.naturalHeight;
+   window.ZOOM_FACTOR = YOUR_ZOOM_FACTOR; // e.g., 1.2, 1.8, etc.
    ```
-3. Import and test it in `tests/e2e/grid_runner.spec.js`
+
+2. **Use provided global variables** (already in HTML template):
+   - `imageViewer`, `imageContainer`, `img`
+   - `gridOverlay`, `topLinesSvg`, `leftLinesSvg`
+   - `topBar`, `leftBar`
+   - `zoomLevelSpan`, `zoomInButton`, `zoomOutButton`
+
+3. **Implement these functions**:
+   - `drawGridOverlay()` - Draw 45x45 grid on image
+   - `drawTopLines()` - Draw horizontal ruler above image
+   - `drawLeftLines()` - Draw vertical ruler beside image
+   - `updateTransform()` - Synchronize all transforms
+   - `zoom()` - Handle zoom with zoom-to-mouse logic
+
+4. **Handle these events**:
+   - Mouse wheel (zoom)
+   - Mouse drag (pan)
+   - Zoom button clicks
+   - Window resize
+
+## ✅ Success Criteria
+
+Your implementation passes the tests if:
+
+### Translation Test ✅
+After dragging 50px right, 80px down:
+- Image: translateX = 50, translateY = 80
+- Top ruler: translateX = 50 (Y stays 0)
+- Left ruler: translateY = 80 (X stays 0)
+
+### Scale Test ✅
+After clicking zoom-in:
+- Scale equals your `ZOOM_FACTOR`
+- Ruler lines scale proportionally
+- Grid lines maintain relative positions
+
+## 💡 Tips for AI Systems
+
+- **The spec has everything** - Complete HTML, CSS, and JavaScript patterns
+- **Start simple** - Get pan/zoom working, then add rulers
+- **Test incrementally** - Run `npm run test:ui` after each feature  
+- **Read error messages** - Tests tell you exactly what's expected
+- **Use the helper functions** - SPEC.md includes all needed patterns
+
+**Important**: No access to existing implementations (like `implementation_A.js`) - that defeats the purpose of the challenge!
+
+## 🔧 Common Issues
+
+**Tests can't find implementations?**
+- File must start with `implementation_` and end with `.js`
+- File must be in the `src/` directory
+
+**"img.onload is not a function" error?**
+- Set up `img.onload = () => { ... }` in your implementation
+- Use the global `img` variable provided by the template
+
+**Transform not synchronized?**
+- Update `topLinesSvg.style.transform` and `leftLinesSvg.style.transform`
+- Both should use the same `translateX` and `translateY` values
+
+## 📊 Grid Specifications
+
+- **45 divisions** in both X and Y directions
+- Grid lines: Red, semi-transparent (0.5 opacity)
+- Ruler lines: Black, solid
+- Line width scales with zoom level
+- Labels every 5 divisions on rulers
+
+## 🎓 Current Implementations
+
+- `implementation_A.js` - Standard (ZOOM_FACTOR = 1.2)
+- `implementation_B.js` - Fast zoom (ZOOM_FACTOR = 1.8)
+- `implementation_C.js` - Slow zoom (ZOOM_FACTOR = 1.05)
+
+All are automatically discovered and tested!
 
 ## License
 
 MIT
-

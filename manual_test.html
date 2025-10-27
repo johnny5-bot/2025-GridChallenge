@@ -1,6 +1,4 @@
 <!-- File: 2025-GridChallenge/manual_test.html -->
-<!-- This file is for manually testing any implementation by using a URL parameter -->
-<!-- Example: /manual_test.html?impl=src/implementation_B.js -->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -24,13 +22,6 @@
 
         <div id="left-center" class="grid-cell">
             <svg id="left-lines"></svg>
-            <!-- Implementation selector UI (keeps shared CSS unchanged) -->
-            <div id="impl-selector" style="position: relative; margin: 6px; font-family: sans-serif; font-size: 12px;">
-                <label for="implSelect">Implementation: </label>
-                <select id="implSelect">
-                    <!-- options populated by script -->
-                </select>
-            </div>
         </div>
 
         <div id="center-center" class="grid-cell">
@@ -42,6 +33,13 @@
                 <button id="zoom-out">-</button>
                 <span id="zoom-level" style="color: white; margin: 0 5px;">100%</span>
                 <button id="zoom-in">+</button>
+            </div>
+            <!-- Implementation selector UI -->
+            <div id="impl-selector" style="position: absolute; top: 50px; right: 10px; background: rgba(0,0,0,0.5); padding: 5px; border-radius: 3px; display: flex; align-items: center; font-family: sans-serif; font-size: 12px;">
+                <label for="implSelect" style="color: white; margin-right: 5px;">Implementation: </label>
+                <select id="implSelect" style="padding: 2px 5px;">
+                    <!-- options populated by script -->
+                </select>
             </div>
         </div>
 

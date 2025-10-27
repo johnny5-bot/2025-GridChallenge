@@ -23,10 +23,21 @@
                 <img id="image-element" alt="Load image...">
                 <svg id="grid-overlay" class="svg-overlay"></svg>
             </div>
-            <div class="zoom-controls">
-                <button id="zoom-out">-</button>
-                <span id="zoom-level" style="color: white; margin: 0 5px;">100%</span>
-                <button id="zoom-in">+</button>
+            <div style="position: absolute; top: 10px; right: 10px; display: flex; flex-direction: column; gap: 5px;">
+                <div class="zoom-controls">
+                    <button id="zoom-out">-</button>
+                    <span id="zoom-level" style="color: white; margin: 0 5px;">100%</span>
+                    <button id="zoom-in">+</button>
+                </div>
+                <div class="implementation-selector" style="background: rgba(0,0,0,0.5); padding: 5px; border-radius: 3px; z-index: 10; display: none;">
+                    <label for="impl-select" style="color: white; margin-right: 5px;">Implementation:</label>
+                    <select id="impl-select" style="padding: 2px 5px;">
+                        <option value="implementation_A.js">A</option>
+                        <option value="implementation_B.js">B</option>
+                        <option value="implementation_C.js">C</option>
+                    </select>
+                    <button id="load-impl" style="margin-left: 5px; padding: 2px 8px;">Load</button>
+                </div>
             </div>
         </div>
 
@@ -46,6 +57,26 @@
         const zoomLevelSpan = document.getElementById('zoom-level');
         const zoomInButton = document.getElementById('zoom-in');
         const zoomOutButton = document.getElementById('zoom-out');
+
+        // Implementation selector (for manual testing)
+        const implSelector = document.getElementById('impl-select');
+        const loadImplButton = document.getElementById('load-impl');
+        
+        // Show selector in browser (not in tests)
+        if (window.location.protocol === 'file:') {
+            document.querySelector('.implementation-selector').style.display = 'block';
+            
+            loadImplButton.addEventListener('click', () => {
+                const selectedImpl = implSelector.value;
+                const basePath = '../src/';
+                const script = document.createElement('script');
+                script.src = basePath + selectedImpl;
+                script.onload = () => {
+                    console.log(`Loaded: ${selectedImpl}`);
+                };
+                document.body.appendChild(script);
+            });
+        }
 
         // The implementation scripts will set window.imgWidth and window.imgHeight
     </script>

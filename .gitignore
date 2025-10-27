@@ -1,9 +1,28 @@
+# Dependencies
 node_modules/
+
+# Test results
 test-results/
 playwright-report/
 playwright/.cache/
-.DS_Store
-*.log
-.env
 test-results.json
+
+# Generated files
+SPEC.md
+
+# IDE
+.DS_Store
+.vscode/settings.json
+
+# Logs
+*.log
+
+# Environment
+.env
+
+# Repomix
 repomix-output.xml
+
+# Editor backups
+*~
+.*.swp
