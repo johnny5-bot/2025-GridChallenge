@@ -6,7 +6,7 @@ const GRID_X_DIVISIONS = 45;
 const GRID_Y_DIVISIONS = 45;
 const MIN_ZOOM = 0.1;
 const MAX_ZOOM = 10.0;
-const ZOOM_FACTOR = 0.1; // <-- Implementation A's zoom factor
+const ZOOM_FACTOR = 1.02; // <-- Implementation A's zoom factor
 // Make ZOOM_FACTOR global for tests
 window.ZOOM_FACTOR = ZOOM_FACTOR;
 // ------------------

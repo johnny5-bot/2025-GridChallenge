@@ -13,7 +13,7 @@ const MAX_ZOOM = 10.0;
 // --- MODIFIED ---
 // Set your desired zoom speed here. 
 // 1.1 is very slow, 1.5 is fast. 1.2 is a good default.
-const ZOOM_FACTOR_INPUT = 1.05; 
+const ZOOM_FACTOR_INPUT = 1.02; 
 // --- END MODIFIED ---
 
 // --- ADDED SAFETY CHECK ---
