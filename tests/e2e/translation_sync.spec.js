@@ -26,7 +26,6 @@ const srcPath = path.join(__dirname, '../../src');
 const implementations = fs.readdirSync(srcPath)
   .filter(file => file.startsWith('implementation_') && file.endsWith('.js'))
   .filter(file => !file.includes('reference')) // Exclude reference implementations from tests
-  .sort();
 
 console.log(`Translation Sync - Discovered implementations: ${implementations.join(', ')}`);
 

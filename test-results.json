@@ -1,5 +1,3 @@
-Translation Sync - Discovered implementations: 
-Zoom Sync - Discovered implementations: 
 {
   "config": {
     "configFile": "/Users/ww5/2025-GridChallenge/playwright.config.js",
@@ -12,11 +10,20 @@ Zoom Sync - Discovered implementations:
     "grep": {},
     "grepInvert": null,
     "maxFailures": 0,
-    "metadata": {},
+    "metadata": {
+      "actualWorkers": 3
+    },
     "preserveOutput": "always",
     "reporter": [
       [
-        "json"
+        "html",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "test-results.json"
+        }
       ]
     ],
     "reportSlowTests": {
@@ -29,7 +36,9 @@ Zoom Sync - Discovered implementations:
         "outputDir": "/Users/ww5/2025-GridChallenge/test-results",
         "repeatEach": 1,
         "retries": 0,
-        "metadata": {},
+        "metadata": {
+          "actualWorkers": 3
+        },
         "id": "",
         "name": "",
         "testDir": "/Users/ww5/2025-GridChallenge/tests/e2e",
@@ -47,17 +56,132 @@ Zoom Sync - Discovered implementations:
     "workers": 6,
     "webServer": null
   },
-  "suites": [],
-  "errors": [
+  "suites": [
     {
-      "message": "Error: No tests found",
-      "stack": "Error: No tests found"
+      "title": "translation_sync.spec.js",
+      "file": "translation_sync.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Translation Synchronization - [implementation_reference.js]",
+          "file": "translation_sync.spec.js",
+          "line": 34,
+          "column": 8,
+          "specs": [
+            {
+              "title": "should synchronize top ruler with horizontal pan",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 10000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 447,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-10-27T01:09:31.217Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "6ff5e13deffe896e8155-642f9b06d65fee8a4dd7",
+              "file": "translation_sync.spec.js",
+              "line": 56,
+              "column": 5
+            },
+            {
+              "title": "should synchronize left ruler with vertical pan",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 10000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 444,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-10-27T01:09:31.220Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "6ff5e13deffe896e8155-79d428b5b65710ca7a44",
+              "file": "translation_sync.spec.js",
+              "line": 81,
+              "column": 5
+            },
+            {
+              "title": "should synchronize both rulers with diagonal pan",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 10000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 449,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-10-27T01:09:31.225Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "6ff5e13deffe896e8155-84f4a8bac236ed094219",
+              "file": "translation_sync.spec.js",
+              "line": 106,
+              "column": 5
+            }
+          ]
+        }
+      ]
     }
   ],
+  "errors": [],
   "stats": {
-    "startTime": "2025-10-27T01:02:09.355Z",
-    "duration": 8.697999999999979,
-    "expected": 0,
+    "startTime": "2025-10-27T01:09:30.808Z",
+    "duration": 1134.864,
+    "expected": 3,
     "skipped": 0,
     "unexpected": 0,
     "flaky": 0
