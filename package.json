@@ -9,7 +9,7 @@
     "test:debug": "playwright test --debug",
     "spec": "node gen_spec.js > SPEC.md",
     "manual": "node generate_manual_test.js > manual_test.html",
-    "repomix": "npm run spec && playwright test --reporter=json && repomix"
+    "repomix": "npm run spec && playwright test --reporter=json > /dev/null && repomix"
   },
   "keywords": [
     "grid",
