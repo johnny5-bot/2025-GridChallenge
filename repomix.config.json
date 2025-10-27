@@ -1,1 +1,14 @@
-{}
+{
+  "includeGlobs": [
+    "test-results.json"
+  ],
+  "ignoreGlobs": [
+    "node_modules/**",
+    ".git/**",
+    "test-results/**",
+    "playwright-report/**",
+    "playwright/.cache/**"
+  ],
+  "ignoreContentPatterns": [],
+  "obfuscate": false
+}
