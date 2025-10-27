@@ -1,9 +1,7 @@
 {
-  "includePaths": [
-    ".",
-    "test-results.json",
-    "SPEC.md"
-  ],
+  "ignore": {
+    "useIgnoreFiles": false
+  },
   "ignoreGlobs": [
     "node_modules/**",
     ".git/**",
@@ -12,7 +10,5 @@
     "playwright/.cache/**",
     "*.log"
   ],
-  "ignoreContentPatterns": [],
-  "useIgnoreFiles": false,
   "obfuscate": false
 }
