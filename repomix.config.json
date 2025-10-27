@@ -1,16 +1,12 @@
 {
-  "includePaths": [
-    "test-results.json",
-    "SPEC.md"
-  ],
   "ignoreGlobs": [
     "node_modules/**",
     ".git/**",
     "test-results/**",
     "playwright-report/**",
-    "playwright/.cache/**"
+    "playwright/.cache/**",
+    "*.log"
   ],
   "ignoreContentPatterns": [],
-  "useIgnoreFiles": false,
   "obfuscate": false
 }
