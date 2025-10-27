@@ -10,7 +10,6 @@ playwright/.cache/
 # Generated files
 SPEC.md
 manual_test.html
-test-results.json
 
 # IDE
 .DS_Store
