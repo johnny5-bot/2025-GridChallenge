@@ -8,7 +8,8 @@
     "test:headed": "playwright test --headed",
     "test:debug": "playwright test --debug",
     "spec": "node gen_spec.js",
-    "manual": "node generate_manual_test.js > manual_test.html"
+    "manual": "node generate_manual_test.js > manual_test.html",
+    "repomix": "npm test -- --reporter=json && repomix"
   },
   "keywords": [
     "grid",
