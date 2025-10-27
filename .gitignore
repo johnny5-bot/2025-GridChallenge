@@ -9,6 +9,7 @@ test-results.json
 
 # Generated files
 SPEC.md
+manual_test.html
 
 # IDE
 .DS_Store

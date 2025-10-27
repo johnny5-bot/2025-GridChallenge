@@ -1,18 +1,47 @@
-<!-- File: 2025-GridChallenge/manual_test.html -->
+#!/usr/bin/env node
 
+/**
+ * Generate manual_test.html with auto-discovered implementations
+ * Usage: node scripts/generate_manual_test.js > manual_test.html
+ */
+
+const fs = require('fs');
+const path = require('path');
+
+// Discover all implementations
+const srcPath = path.join(__dirname, '../src');
+const implementationFiles = fs.readdirSync(srcPath)
+  .filter(file => file.startsWith('implementation_') && file.endsWith('.js'))
+  .sort();
+
+// Generate implementations array
+const implementations = implementationFiles.map((file, index) => {
+  const letter = String.fromCharCode(65 + index); // A, B, C, D, ...
+  return `{ label: 'Implementation ${letter}', value: './src/${file}' }`;
+}).join(',\n            ');
+
+// Generate the dynamic loading script
+const dynamicLoader = `
+        // Auto-discovered implementations
+        const implementations = [
+            ${implementations}
+        ];`;
+
+console.log(`
+<!-- 
+    File: manual_test.html
+    THIS FILE IS AUTO-GENERATED - Do not edit manually!
+    Run: node scripts/generate_manual_test.js > manual_test.html
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- The title will be set by the script below -->
     <title>MANUAL TEST</title>
-    
-    <!-- Shared CSS is part of the spec -->
     <link rel="stylesheet" href="./challenge.css">
 </head>
 <body>
-    <!-- This is the complete, shared HTML (DOM) for all implementations -->
     <div class="app-container">
         <div id="top-left" class="grid-cell"></div>
         <div id="top-center" class="grid-cell">
@@ -46,7 +75,6 @@
         <div id="right-center" class="grid-cell"></div>
     </div>
 
-    <!-- 1. Define all the global const variables for the implementations -->
     <script>
         const imageViewer = document.getElementById('center-center');
         const imageContainer = document.getElementById('image-container');
@@ -61,21 +89,11 @@
         const zoomOutButton = document.getElementById('zoom-out');
     </script>
 
-    <!-- 2. Selector in left pane + dynamic script loader (CSS unchanged) -->
-    <script>
-        // Available implementations (paths relative to this file)
-        const implementations = [
-            { label: 'Implementation A', value: './src/implementation_A.js' },
-            { label: 'Implementation B', value: './src/implementation_B.js' },
-            { label: 'Implementation C', value: './src/implementation_C.js' },
-        ];
-
-        // Read ?impl=... from URL and default to B
+    <script>${dynamicLoader}
         const params = new URLSearchParams(window.location.search);
         const implFromUrl = params.get('impl');
-        const implFile = implFromUrl ? implFromUrl : implementations[1].value;
+        const implFile = implFromUrl ? implFromUrl : implementations[0].value;
 
-        // Populate the selector in the left pane
         const implSelect = document.getElementById('implSelect');
         if (implSelect) {
             implementations.forEach(opt => {
@@ -86,24 +104,20 @@
                 implSelect.appendChild(o);
             });
             implSelect.addEventListener('change', () => {
-                const newImpl = implSelect.value;
-                const newParams = new URLSearchParams(window.location.search);
-                newParams.set('impl', newImpl);
-                window.location.search = newParams.toString();
+                window.location.search = '?impl=' + encodeURIComponent(implSelect.value);
             });
         }
 
-        // Update title to show active implementation
-        document.title = `MANUAL TEST - ${implFile}`;
+        document.title = 'MANUAL TEST - ' + implFile;
 
-        // Dynamically load the chosen implementation
         const scriptTag = document.createElement('script');
         scriptTag.onerror = () => {
-            document.body.innerHTML = `<h1 style="color: red; font-family: sans-serif; padding: 20px;">Error: Could not load script: ${implFile}</h1><p style="font-family: sans-serif; padding: 20px;">Make sure the file exists and the path is correct in the URL (e.g., ?impl=src/implementation_A.js)</p>`;
+            document.body.innerHTML = '<h1 style="color: red; font-family: sans-serif; padding: 20px;">Error: Could not load script: ' + implFile + '</h1><p style="font-family: sans-serif; padding: 20px;">Make sure the file exists and the path is correct in the URL (e.g., ?impl=src/implementation_A.js)</p>';
         };
         scriptTag.src = implFile;
         document.body.appendChild(scriptTag);
     </script>
-
 </body>
 </html>
+`);
+

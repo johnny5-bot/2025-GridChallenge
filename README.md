@@ -56,6 +56,7 @@ tests/
 | `npm run test:headed` | Watch tests in browser |
 | `npm run test:debug` | Debug mode |
 | `npm run spec` | Generate complete specification |
+| `npm run manual` | Generate manual_test.html for manual testing |
 
 ## 🤖 Testing AI Systems
 
@@ -108,6 +109,18 @@ npx playwright test --grep "implementation_AI"
 ```
 
 The goal is to see if an AI can **one-shot** solve this challenge using only the specification. No hints, no examples, no templates - just the spec.
+
+## 🧪 Manual Testing
+
+For hands-on testing of implementations:
+
+```bash
+npm run manual
+```
+
+This generates `manual_test.html` with a dropdown selector to switch between implementations. Open `manual_test.html` in a browser to test implementations visually.
+
+**Note**: `manual_test.html` is auto-generated and gitignored - regenerate it after adding new implementations.
 
 ## 📚 Implementation Requirements
 
