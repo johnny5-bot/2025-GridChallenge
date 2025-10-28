@@ -25,8 +25,7 @@ async function getTransform(page, selector) {
 const srcPath = path.join(__dirname, '../../src');
 const implementations = fs.readdirSync(srcPath)
   .filter(file => file.startsWith('implementation_') && file.endsWith('.js'))
-
-console.log(`Translation Sync - Discovered implementations: ${implementations.join(', ')}`);
+  .sort();
 
 // Test each implementation
 for (const implFile of implementations) {
