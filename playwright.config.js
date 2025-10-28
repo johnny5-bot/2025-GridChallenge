@@ -10,7 +10,7 @@ module.exports = defineConfig({
   // We've changed 'reporter' from a simple string to an array of arrays.
   // This tells Playwright to use multiple reporters.
   reporter: [
-    'list',  // Show test names in console
+    ['list'],  // Show test names in console
     ['html'], 
     ['json', { outputFile: 'test-results.json' }]
   ],
