@@ -7,8 +7,6 @@ const implementations = fs.readdirSync(srcPath)
   .filter(f => f.startsWith('implementation_') && f.endsWith('.js'))
   .sort();
 
-console.log(`Grid Alignment - Discovered implementations: ${implementations.join(', ')}`);
-
 const DATA_URL_800 =
   'data:image/svg+xml;utf8,' +
   encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="800" height="800"></svg>');

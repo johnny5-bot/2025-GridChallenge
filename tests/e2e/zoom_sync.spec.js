@@ -27,8 +27,6 @@ const implementations = fs.readdirSync(srcPath)
   .filter(file => file.startsWith('implementation_') && file.endsWith('.js'))
   .sort();
 
-console.log(`Zoom Sync - Discovered implementations: ${implementations.join(', ')}`);
-
 // Test each implementation
 for (const implFile of implementations) {
   
